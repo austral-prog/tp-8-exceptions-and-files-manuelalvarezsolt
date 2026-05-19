@@ -55,3 +55,4 @@ def parse_log(filename):
                 dict[linea[: espacio].strip()].append(linea[espacio+1:].strip())
             else:
                 dict[linea[: espacio].strip()] = [linea[espacio+1:].strip()]
+    return dict
