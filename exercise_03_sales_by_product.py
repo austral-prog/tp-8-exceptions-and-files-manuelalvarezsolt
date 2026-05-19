@@ -1,5 +1,3 @@
-# Ejercicio 3 - Ventas por producto
-
 
 def read_sales(filename):
     """
@@ -31,7 +29,19 @@ def read_sales(filename):
             "producto2": [200.0],
         }
     """
-    pass  # Reemplazar con tu implementación
+    dict = {}
+    lst = []
+    with open(filename, "r") as f:
+        contenido = f.read()
+        for valores in contenido.split(";"):
+            if valores != "" and ":" in valores:
+                espacio = valores.find(":")
+                if valores[:espacio] in dict:
+                    dict[valores[:espacio]].append(float(valores[espacio+1:]))
+                else:
+                    dict[valores[:espacio]] = [float(valores[espacio+1:])]
+    return dict
+
 
 
 def process_sales(data):
@@ -53,4 +63,7 @@ def process_sales(data):
         process_sales({"producto1": [100.0, 150.0]})
         # imprime: "producto1: ventas totales $250.00, promedio $125.00"
     """
-    pass  # Reemplazar con tu implementación
+    for claves in data:
+        print(f"{claves}: ventas totales ${sum(data[claves]):.2f}, promedio ${sum(data[claves]) / len(data[claves]):.2f}")
+
+
