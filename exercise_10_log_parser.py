@@ -54,4 +54,3 @@ def parse_log(filename):
                 dict[filas.strip()[: espacio].strip()].append(filas.strip()[espacio+1:].strip())
             else:
                 dict[filas.strip()[: espacio].strip()] = [filas.strip()[espacio+1:].strip()]
-
