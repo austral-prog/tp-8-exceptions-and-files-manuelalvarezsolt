@@ -42,4 +42,16 @@ def parse_log(filename):
             "WARN": ["lento"],
         }
     """
-    pass  # Reemplazar con tu implementación
+    dict = {}
+    with open(filename, "r") as texto:
+        for filas in texto:
+            if filas.strip() == "":
+                continue
+            if ":" not in filas.strip():
+                raise ValueError("invalid log line")
+            espacio = filas.strip().find(":")
+            if filas.strip()[: espacio] in dict:
+                dict[filas.strip()[: espacio].strip()].append(filas.strip()[espacio+1:].strip())
+            else:
+                dict[filas.strip()[: espacio].strip()] = [filas.strip()[espacio+1:].strip()]
+
