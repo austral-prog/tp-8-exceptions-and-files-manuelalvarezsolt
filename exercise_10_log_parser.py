@@ -45,12 +45,13 @@ def parse_log(filename):
     dict = {}
     with open(filename, "r") as texto:
         for filas in texto:
-            if filas.strip() == "":
+            linea = filas.strip()
+            if linea == "":
                 continue
-            if ":" not in filas.strip():
+            if ":" not in linea:
                 raise ValueError("invalid log line")
-            espacio = filas.strip().find(":")
-            if filas.strip()[: espacio] in dict:
-                dict[filas.strip()[: espacio].strip()].append(filas.strip()[espacio+1:].strip())
+            espacio = linea.find(":")
+            if linea[: espacio] in dict:
+                dict[linea[: espacio].strip()].append(linea[espacio+1:].strip())
             else:
-                dict[filas.strip()[: espacio].strip()] = [filas.strip()[espacio+1:].strip()]
+                dict[linea[: espacio].strip()] = [linea[espacio+1:].strip()]
