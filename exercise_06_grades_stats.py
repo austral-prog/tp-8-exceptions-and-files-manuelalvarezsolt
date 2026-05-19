@@ -1,4 +1,3 @@
-# Ejercicio 6 - Estadísticas de notas por estudiante
 
 
 def grades_stats(filename):
@@ -34,4 +33,15 @@ def grades_stats(filename):
             "Cami": (10.0, 10.0, 10.0),
         }
     """
-    pass  # Reemplazar con tu implementación
+    dic = {}
+    with open(filename, "r") as f:
+        for lineas in f:
+            if lineas.strip() == "":
+                continue
+            espacio = lineas.find(":")
+            numeros = lineas[espacio + 1:].split(",")
+            lst = []
+            for cosas in numeros:
+                lst.append(float(cosas))
+            dic[lineas[:espacio]] = (sum(lst) / len(lst), max(lst), min(lst))
+    return dic
